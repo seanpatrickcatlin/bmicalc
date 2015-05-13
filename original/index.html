@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abian BMI</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+    <script src="abianbmi.js"></script>
+</head>
+<body>
+<div data-role="page" data-theme="a" id="abianBmiTool">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false" data-fullscreen="false">
+        <h1>Abian BMI Tool</h1>
+    </div>
+
+    <div data-role="content">
+        <div data-role="fieldcontain">
+            <label for="abmi-weight-tc">Weight:</label>
+            <input type="text" name="abmi-weight-tc" id="abmi-weight-tc" placeholder="pounds" value="">
+        </div>
+
+        <div data-role="fieldcontain">
+            <label for="abmi-height-ft-tc">Height:</label>
+            <input type="text" name="abmi-height-ft-tc" id="abmi-height-ft-tc" placeholder="feet" value="">
+        </div>
+
+        <div data-role="fieldcontain">
+            <label for="abmi-height-in-tc"></label>
+            <input type="text" name="abmi-height-in-tc" id="abmi-height-in-tc" placeholder="inches" value="">
+        </div>
+
+        <a href="#" id="abmi-calc-btn" data-role="button">Calculate</a>
+
+        <div id="abmi-results-div">
+            <h2>Current BMI: <span id="abmi-current-bmi"></span></h2>
+            <table data-role="table" data-mode="reflow" id="abmi-results-table" class="ui-responsive table-stripe">
+                <thead>
+                    <tr>
+                        <th scope='col'>Classification</th>
+                        <th scope='col'>Min Weight</th>
+                        <th scope='col'>Max Weight</th>
+                        <th scope='col'>Need To Lose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="abmi-super-obese">
+                        <th scope='row'>Super Obese</th>
+                        <td class='abmi-min-weight'></td>
+                        <td class='abmi-max-weight'></td>
+                        <td class='abmi-need-to-lose'></td>
+                    </tr>
+                    <tr id="abmi-morbidly-obese">
+                        <th scope='row'>Morbidly Obese</th>
+                        <td class='abmi-min-weight'></td>
+                        <td class='abmi-max-weight'></td>
+                        <td class='abmi-need-to-lose'></td>
+                    </tr>
+                    <tr id="abmi-severly-obese">
+                        <th scope='row'>Severely Obese</th>
+                        <td class='abmi-min-weight'></td>
+                        <td class='abmi-max-weight'></td>
+                        <td class='abmi-need-to-lose'></td>
+                    </tr>
+                    <tr id="abmi-obese">
+                        <th scope='row'>Obese</th>
+                        <td class='abmi-min-weight'></td>
+                        <td class='abmi-max-weight'></td>
+                        <td class='abmi-need-to-lose'></td>
+                    </tr>
+                    <tr id="abmi-overweight">
+                        <th scope='row'>Overweight</th>
+                        <td class='abmi-min-weight'></td>
+                        <td class='abmi-max-weight'></td>
+                        <td class='abmi-need-to-lose'></td>
+                    </tr>
+                    <tr id="abmi-normal">
+                        <th scope='row'>Normal</th>
+                        <td class='abmi-min-weight'></td>
+                        <td class='abmi-max-weight'></td>
+                        <td class='abmi-need-to-lose'></td>
+                    </tr>
+                    <tr id="abmi-underweight">
+                        <th scope='row'>Underweight</th>
+                        <td class='abmi-min-weight'></td>
+                        <td class='abmi-max-weight'></td>
+                        <td class='abmi-need-to-lose'></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            <div id="abmi-projection-div">
+        </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
