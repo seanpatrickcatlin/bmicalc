@@ -31,52 +31,57 @@
      * Handle jQuery Mobile tap events on the calculate button.
      */
     var onCalculateButtonTap = function () {
-        var curWeight = parseFloat($('#bmi-weight-tc').val());
+        var currentWeight = parseFloat($('#bmi-weight-tc').val());
 
-        var curHeightFt = parseInt($('#bmi-height-ft-tc').val(), 10);
-        var curHeightIn = parseFloat($('#bmi-height-in-tc').val());
+        var currentHeightFeetValue = parseInt($('#bmi-height-ft-tc').val(), 10);
+        var currentHeightInchesValue = parseFloat($('#bmi-height-in-tc').val());
 
-        var curHeight = (curHeightFt * 12) + curHeightIn;
+        var currentHeightTotalInches = (currentHeightFeetValue * 12) + currentHeightInchesValue;
 
-        var curBmi = roundWithDecimal(((curWeight / (curHeight * curHeight)) * 703), 3);
-
-        var needToLoseVal = '';
+        var currentBmi = roundWithDecimal(((currentWeight /
+            (currentHeightTotalInches * currentHeightTotalInches)) * 703), 3);
 
         $('#bmi-results-div').show();
 
-        if (curBmi > 50) {
-            $('#bmi-current-bmi').html(curBmi + ' (Super Obese)');
-        } else if (curBmi > 40) {
-            $('#bmi-current-bmi').html(curBmi + ' (Morbidly Obese)');
-        } else if (curBmi > 35) {
-            $('#bmi-current-bmi').html(curBmi + ' (Severely Obese)');
-        } else if (curBmi > 30) {
-            $('#bmi-current-bmi').html(curBmi + ' (Obese)');
-        } else if (curBmi > 25) {
-            $('#bmi-current-bmi').html(curBmi + ' (Overweight)');
-        } else if (curBmi > 18.49) {
-            $('#bmi-current-bmi').html(curBmi + ' (Normal)');
+        var bmiDescription = 'unknown';
+
+        if (currentBmi > 50) {
+            bmiDescription = 'Super Obese';
+        } else if (currentBmi > 40) {
+            bmiDescription = 'Morbidly Obese';
+        } else if (currentBmi > 35) {
+            bmiDescription = 'Severely Obese';
+        } else if (currentBmi > 30) {
+            bmiDescription = 'Obese';
+        } else if (currentBmi > 25) {
+            bmiDescription = 'Overweight';
+        } else if (currentBmi > 18.49) {
+            bmiDescription = 'Normal';
         } else {
-            $('#bmi-current-bmi').html(curBmi + ' (Underweight)');
+            bmiDescription = 'Underweight';
         }
 
+        $('#bmi-current-bmi').html(currentBmi + ' (' + bmiDescription + ')');
+
         var superObeseNode = $('#bmi-super-obese');
-        if (curBmi > 50) {
+        if (currentBmi > 50) {
             superObeseNode.show();
-            superObeseNode.find('.bmi-min-weight').html(getWeightForBmi(50, curHeight));
+            superObeseNode.find('.bmi-min-weight').html(getWeightForBmi(50, currentHeightTotalInches));
             superObeseNode.find('.bmi-max-weight').html('');
             superObeseNode.find('.bmi-need-to-lose').html('');
         } else {
             superObeseNode.hide();
         }
 
+        var needToLoseVal = "";
+
         var morbidlyObeseNode = $('#bmi-morbidly-obese');
-        if (curBmi > 40) {
+        if (currentBmi > 40) {
             morbidlyObeseNode.show();
-            morbidlyObeseNode.find('.bmi-min-weight').html(getWeightForBmi(40, curHeight));
-            morbidlyObeseNode.find('.bmi-max-weight').html(getWeightForBmi(49.99, curHeight));
-            if (curBmi >= 50) {
-                needToLoseVal = roundWithDecimal(curWeight - getWeightForBmi(49.99, curHeight), 2);
+            morbidlyObeseNode.find('.bmi-min-weight').html(getWeightForBmi(40, currentHeightTotalInches));
+            morbidlyObeseNode.find('.bmi-max-weight').html(getWeightForBmi(49.99, currentHeightTotalInches));
+            if (currentBmi >= 50) {
+                needToLoseVal = roundWithDecimal(currentWeight - getWeightForBmi(49.99, currentHeightTotalInches), 2);
             } else {
                 needToLoseVal = '';
             }
@@ -86,12 +91,12 @@
         }
 
         var severlyObeseNode = $('#bmi-severly-obese');
-        if (curBmi > 35) {
+        if (currentBmi > 35) {
             severlyObeseNode.show();
-            severlyObeseNode.find('.bmi-min-weight').html(getWeightForBmi(35, curHeight));
-            severlyObeseNode.find('.bmi-max-weight').html(getWeightForBmi(39.99, curHeight));
-            if (curBmi >= 40) {
-                needToLoseVal = roundWithDecimal(curWeight - getWeightForBmi(39.99, curHeight), 2);
+            severlyObeseNode.find('.bmi-min-weight').html(getWeightForBmi(35, currentHeightTotalInches));
+            severlyObeseNode.find('.bmi-max-weight').html(getWeightForBmi(39.99, currentHeightTotalInches));
+            if (currentBmi >= 40) {
+                needToLoseVal = roundWithDecimal(currentWeight - getWeightForBmi(39.99, currentHeightTotalInches), 2);
             } else {
                 needToLoseVal = '';
             }
@@ -101,13 +106,12 @@
         }
 
         var obeseNode = $('#bmi-obese');
-
-        if (curBmi > 30) {
+        if (currentBmi > 30) {
             obeseNode.show();
-            obeseNode.find('.bmi-min-weight').html(getWeightForBmi(30, curHeight));
-            obeseNode.find('.bmi-max-weight').html(getWeightForBmi(34.99, curHeight));
-            if (curBmi >= 35) {
-                needToLoseVal = roundWithDecimal(curWeight - getWeightForBmi(34.99, curHeight), 2);
+            obeseNode.find('.bmi-min-weight').html(getWeightForBmi(30, currentHeightTotalInches));
+            obeseNode.find('.bmi-max-weight').html(getWeightForBmi(34.99, currentHeightTotalInches));
+            if (currentBmi >= 35) {
+                needToLoseVal = roundWithDecimal(currentWeight - getWeightForBmi(34.99, currentHeightTotalInches), 2);
             } else {
                 needToLoseVal = '';
             }
@@ -117,12 +121,12 @@
         }
 
         var overweightNode = $('#bmi-overweight');
-        if (curBmi > 25) {
+        if (currentBmi > 25) {
             overweightNode.show();
-            overweightNode.find('.bmi-min-weight').html(getWeightForBmi(25, curHeight));
-            overweightNode.find('.bmi-max-weight').html(getWeightForBmi(29.99, curHeight));
-            if (curBmi >= 30) {
-                needToLoseVal = roundWithDecimal(curWeight - getWeightForBmi(29.99, curHeight), 2);
+            overweightNode.find('.bmi-min-weight').html(getWeightForBmi(25, currentHeightTotalInches));
+            overweightNode.find('.bmi-max-weight').html(getWeightForBmi(29.99, currentHeightTotalInches));
+            if (currentBmi >= 30) {
+                needToLoseVal = roundWithDecimal(currentWeight - getWeightForBmi(29.99, currentHeightTotalInches), 2);
             } else {
                 needToLoseVal = '';
             }
@@ -135,10 +139,10 @@
 
         var normalNode = $('#bmi-normal');
         normalNode.show();
-        normalNode.find('.bmi-min-weight').html(getWeightForBmi(18.5, curHeight));
-        normalNode.find('.bmi-max-weight').html(getWeightForBmi(24.99, curHeight));
-        if (curBmi >= 25) {
-            needToLoseVal = roundWithDecimal(curWeight - getWeightForBmi(24.99, curHeight), 2);
+        normalNode.find('.bmi-min-weight').html(getWeightForBmi(18.5, currentHeightTotalInches));
+        normalNode.find('.bmi-max-weight').html(getWeightForBmi(24.99, currentHeightTotalInches));
+        if (currentBmi >= 25) {
+            needToLoseVal = roundWithDecimal(currentWeight - getWeightForBmi(24.99, currentHeightTotalInches), 2);
             var projDate = new Date();
             projDate = new Date(projDate.getTime() + (needToLoseVal / 2) * 7 * 24 * 60 * 60 * 1000);
             $('#bmi-projection-div').html('If you lost 2 pounds a week you would be at a normal BMI in ' +
@@ -151,7 +155,7 @@
         /*
          $('#bmi-underweight').show();
          $('#bmi-underweight').find('.bmi-min-weight').html('-');
-         $('#bmi-underweight').find('.bmi-max-weight').html(getWeightForBmi(18.49, curHeight));
+         $('#bmi-underweight').find('.bmi-max-weight').html(getWeightForBmi(18.49, currentHeightTotalInches));
          $('#bmi-underweight').find('.bmi-need-to-lose').html('-');
          */
         $('#bmi-underweight').hide();
