@@ -1,0 +1,26 @@
+{
+  "name": "bmicalc-react",
+  "version": "0.0.1",
+  "description": "BMI Calculator rect implementation",
+  "main": "www/scripts/app.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "envify": "^3.0.0",
+    "reactify": "^0.15.2",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
+  },
+  "scripts": {
+    "start": "watchify -o www/scripts/bundle.js -v -d www/scripts/app.js",
+    "install": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > www/scripts/bundle.min.js"
+  },
+  "author": "Sean Catlin",
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
+}
