@@ -50,3 +50,25 @@
         font-size: 16px;
     }
 }
+
+.materialInput {
+    padding: 4px;
+}
+
+.materialInput span {
+    width: 100px;
+    display: inline-block;
+}
+
+.materialInput input {
+    width: 40px;
+}
+
+tbody th {
+    text-align: left;
+}
+
+thead th {
+    padding-left: 6px;
+    padding-right: 6px;
+}
